@@ -14,6 +14,7 @@ export class HistoryComponent {
   private readonly store = inject(AppState);
 
 
+  /**Metodo que devuelve el historial de transacciones */
   get transactions() {
     return this.store.transactionsHistory();
   }

@@ -20,16 +20,16 @@ export class ModalConfirmSuscriptionComponent {
   /**Variables */
   form:FormGroup = new FormGroup({});
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.form = this.fb.group({
       notificacion: ['EMAIL', Validators.required],
     });
   }
-
+  /**Metodo para confirmar la suscripción */
   confirmSubscribe(): void {
     this.confirmAction.emit({confirmed: true, notification: this.form.value.notificacion});
   }
-
+  /**Metodo para cerrar el modal */
   onClose(): void {
     this.confirmAction.emit({confirmed: false, notification: ''});
   }

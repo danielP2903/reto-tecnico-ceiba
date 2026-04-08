@@ -19,7 +19,7 @@ export class FundsComponent {
   /**Variables */
   tabs = signal<ITabs[]>(TABS);
 
-
+  /**Metodo para manejar la pulsación de una pestaña */
   tabOnpressed(index: number) {
     const path = this.tabs()[index].route;
     this.navigateTo(path);

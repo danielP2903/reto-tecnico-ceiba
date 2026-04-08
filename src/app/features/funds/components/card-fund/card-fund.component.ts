@@ -16,12 +16,14 @@ export class CardFundComponent  {
   @Output() fundSubscribe = new EventEmitter<IFund>();
   hasSuscription = false;
   private readonly store = inject(AppState);
+
+  /**Variable computada para detectar los cambios reactivamente del store y saber si esta o no suscrito a un fondo */
   hasSubscription = computed(() => {
     return this.store.fundsSubscribed().some((f) => f === this.fund.id);
   })
 
 
-
+  /**Metodo para obtener el monto disponible */
   getAmountAvailable() {
     return this.store.availableAmount();
   }

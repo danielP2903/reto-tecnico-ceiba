@@ -10,6 +10,7 @@ export const initialState: IStore = {
   transactionsHistory:[]
 }
 
+/**Se usa la libreria ngrx/signals para mantener el estado reactivo dentro de la aplicación */
 export const AppState = signalStore(
   { providedIn: 'root', protectedState: true },
   withState(initialState),
