@@ -1,0 +1,19 @@
+@import '../../../styles';
+.container {
+ padding: 1rem;
+  margin-top: 2rem;
+  min-height: 0;   // ← permite que el flex hijo crezca correctamente
+  flex: 1;
+
+  // @include for-tablet-portrait-up {
+  // margin-bottom: 10rem;
+  // }
+
+  //  @include for-desktop-line {
+  // margin-bottom: 1rem;
+  // }
+
+  //  @include for-phone-only {
+  //   margin-bottom: 5rem;
+  // }
+}

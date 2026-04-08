@@ -1,0 +1,110 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+
+    <div class="modal__header">
+      <div class="modal__header-info">
+        <span
+          class="modal__category"
+          [class.modal__category--fic]="fund.category === 'FIC'"
+        >
+          {{ fund.category }}
+        </span>
+
+        <h2 class="modal__title">
+          Suscribirse al fondo
+        </h2>
+      </div>
+
+      <button
+        class="modal__close"
+        (click)="onClose()"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="modal__body">
+
+      <!-- Fund summary -->
+      <div class="modal__fund-summary">
+        <p class="modal__fund-name">
+          {{ fund.name }}
+        </p>
+
+        <div class="modal__fund-amount">
+          <span class="modal__fund-amount-label">
+            Se descontará:
+          </span>
+          <span class="modal__fund-amount-value">
+            {{ fund.minimumAmount | currency  : '$ ' : 'symbol' : '1.0-2'}}
+          </span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="form" (ngSubmit)="confirmSubscribe()" novalidate>
+
+        <fieldset class="form-group">
+          <legend class="form-group__label">
+           ¿Cómo quieres que te notifiquemos?
+          </legend>
+
+          <div class="notification-options">
+
+            <label
+              class="notification-option"
+              [class.notification-option--selected]="form.value.notificacion === 'EMAIL'"
+            >
+              <input
+                type="radio"
+                formControlName="notificacion"
+                value="EMAIL"
+                class="notification-option__input"
+              />
+
+              <span class="notification-option__icon notification-option__icon--email"></span>
+              <span class="notification-option__text">Email</span>
+            </label>
+
+            <label
+              class="notification-option"
+              [class.notification-option--selected]="form.value.notificacion === 'SMS'"
+            >
+              <input
+                type="radio"
+                formControlName="notificacion"
+                value="SMS"
+                class="notification-option__input"
+              />
+
+              <span class="notification-option__icon notification-option__icon--sms"></span>
+              <span class="notification-option__text">SMS</span>
+            </label>
+
+          </div>
+        </fieldset>
+
+        <div class="modal__actions">
+          <button
+            type="button"
+            class="btn btn--secondary"
+            (click)="onClose()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn--primary"
+            [disabled]="form.invalid"
+          >
+            Confirmar suscripción
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,369 @@
+@import '../../../../../styles';
+
+// ─── Overlay ─────────────────────────────────────────────────
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+
+
+  @include for-phone-only {
+    align-items: flex-end;
+    padding: 0;
+  }
+}
+
+// ─── Modal ───────────────────────────────────────────────────
+
+.modal {
+  background-color: $btg-white;
+  border-radius: $radius-lg;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.25s ease-out;
+
+  @include for-phone-only {
+    border-radius: $radius-lg $radius-lg 0 0;
+    max-width: 100%;
+    height: 520px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 4px;
+      background-color: $btg-gray-200;
+      border-radius: 100px;
+      margin: 0.875rem auto 0;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.25rem 1.25rem 0.75rem;
+    border-bottom: 1px solid $btg-gray-200;
+
+    @include for-phone-only {
+      padding: 0.75rem 1rem 0.75rem;
+    }
+  }
+
+  &__header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__category {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background-color: rgba($btg-primary, 0.1);
+    color: $btg-primary;
+    width: fit-content;
+
+    &--fic {
+      background-color: rgba($btg-accent, 0.15);
+      color: darken($btg-accent, 25%);
+    }
+  }
+
+  &__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $btg-text;
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $btg-gray-600;
+    font-size: 1rem;
+    padding: 0.3rem;
+    line-height: 1;
+    border-radius: 6px;
+    transition: background-color 0.15s;
+    margin-top: 0.2rem;
+
+    &:hover {
+      background-color: $btg-gray-100;
+      color: $btg-text;
+    }
+  }
+
+  &__body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    @include for-phone-only {
+      padding: 1rem;
+    }
+  }
+
+  // Fund summary
+  &__fund-summary {
+    background-color: $btg-gray-100;
+    border-radius: $radius-md;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+
+    @include for-phone-only {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  &__fund-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $btg-text;
+    margin: 0;
+    word-break: break-word;
+    max-width: 220px;
+
+    @include for-phone-only {
+      max-width: 100%;
+    }
+  }
+
+  &__fund-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+
+    @include for-phone-only {
+      align-items: flex-start;
+    }
+  }
+
+  &__fund-amount-label {
+    font-size: 0.7rem;
+    color: $btg-gray-600;
+    white-space: nowrap;
+  }
+
+  &__fund-amount-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $btg-primary;
+  }
+
+  // Error
+  &__error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background-color: $btg-danger-light;
+    border: 1px solid rgba($btg-danger, 0.25);
+    border-left: 4px solid $btg-danger;
+    border-radius: $radius-md;
+    padding: 0.875rem 1rem;
+    animation: slideDown 0.2s ease-out;
+  }
+
+  &__error-icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    background-color: $btg-danger;
+    color: $btg-white;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  &__error-text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: darken($btg-danger, 10%);
+    line-height: 1.4;
+  }
+
+  // Actions
+  &__actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+
+    @include for-phone-only {
+      flex-direction: column-reverse;
+    }
+
+    .btn {
+      @include for-phone-only {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// ─── Form group ──────────────────────────────────────────────
+
+.form-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  &__label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $btg-gray-800;
+    margin-bottom: 0.75rem;
+  }
+}
+
+// ─── Notification options ────────────────────────────────────
+
+.notification-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+
+  @include for-phone-only {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.notification-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1.5px solid $btg-gray-200;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all 0.15s;
+  background-color: $btg-white;
+  position: relative;
+
+  &:hover {
+    border-color: $btg-primary;
+    background-color: rgba($btg-primary, 0.03);
+  }
+
+  &--selected {
+    border-color: $btg-primary;
+    background-color: rgba($btg-primary, 0.06);
+
+    .notification-option__text {
+      color: $btg-primary;
+      font-weight: 600;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: rgba($btg-primary, 0.1);
+
+    &--email {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 5px 4px;
+        border: 2px solid $btg-primary;
+        border-radius: 3px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 7px;
+        left: 4px;
+        right: 4px;
+        height: 10px;
+        border-top: 2px solid $btg-primary;
+        clip-path: polygon(0 0, 50% 55%, 100% 0);
+      }
+    }
+
+    &--sms {
+      background-color: rgba($btg-accent, 0.15);
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 4px 4px 8px;
+        border: 2px solid darken($btg-accent, 20%);
+        border-radius: 5px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 8px;
+        width: 8px;
+        height: 6px;
+        background-color: darken($btg-accent, 20%);
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+        border-radius: 1px;
+      }
+    }
+  }
+
+  &__text {
+    font-size: 0.875rem;
+    color: $btg-gray-800;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+}
+
+
+// ─── Keyframes ───────────────────────────────────────────────
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

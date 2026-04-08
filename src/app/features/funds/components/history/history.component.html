@@ -1,0 +1,120 @@
+<section class="history">
+  <div class="header">
+    <h1 class="header__title">Historial de transacciones</h1>
+    <p class="header__subtitle">
+      Registro de sus suscripciones y cancelaciones
+    </p>
+  </div>
+
+  <ng-container>
+
+    <!-- Empty state -->
+    @if (transactions.length === 0) {
+      <div class="history__empty">
+        <div class="history__empty-icon"></div>
+        <p class="history__empty-title">No hay transacciones aún</p>
+        <p class="history__empty-text">
+          Sus suscripciones y cancelaciones aparecerán aquí.
+        </p>
+      </div>
+    }
+
+    <!-- Table (tablet & desktop) -->
+    @if (transactions.length > 0) {
+      <div class="history__table-wrapper">
+        <table class="history-table">
+          <thead class="history-table__head">
+            <tr>
+              <th class="history-table__th">Fecha</th>
+              <th class="history-table__th">Fondo</th>
+              <th class="history-table__th">Tipo</th>
+              <th class="history-table__th history-table__th--right">Monto</th>
+              <th class="history-table__th">Notificación</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (tx of transactions; track $index) {
+              <tr class="history-table__row">
+                <td class="history-table__td history-table__td--date">
+                  {{ tx.date | date: 'dd/MM/yyyy HH:mm' }}
+                </td>
+
+                <td class="history-table__td history-table__td--name">
+                  {{ tx.fund }}
+                </td>
+
+                <td class="history-table__td">
+                  <span
+                    class="type-badge"
+                    [class.type-badge--subscription]="tx.type === 'Suscripcion'"
+                    [class.type-badge--cancellation]="tx.type === 'Cancelacion'"
+                  >
+                    {{ tx.type === 'Suscripcion' ? 'Suscripción' : 'Cancelación' }}
+                  </span>
+                </td>
+
+                <td
+                  class="history-table__td history-table__td--amount"
+                  [class.history-table__td--negative]="tx.type === 'Suscripcion'"
+                  [class.history-table__td--positive]="tx.type === 'Cancelacion'"
+                >
+                  {{ tx.type === 'Cancelacion' ? '+' : '-' }}{{ tx.amount | currency  : '$ ' : 'symbol' : '1.0-2' }}
+                </td>
+
+                <td class="history-table__td">
+                  <span class="notification-badge">
+                    {{ tx.notification }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile cards -->
+      <ul class="history-cards">
+        @for (tx of transactions; track $index) {
+          <li
+            class="history-card"
+            [class.history-card--cancellation]="tx.type === 'Cancelacion'"
+          >
+            <div class="history-card__top">
+              <span
+                class="type-badge"
+                [class.type-badge--subscription]="tx.type === 'Suscripcion'"
+                [class.type-badge--cancellation]="tx.type === 'Cancelacion'"
+              >
+                {{ tx.type === 'Suscripcion' ? 'Suscripción' : 'Cancelación' }}
+              </span>
+
+              <span
+                class="history-card__amount"
+                [class.history-card__amount--negative]="tx.type === 'Suscripcion'"
+                [class.history-card__amount--positive]="tx.type === 'Cancelacion'"
+              >
+                {{ tx.type === 'Cancelacion' ? '+' : '-' }}{{ tx.amount | currency  : '$ ' : 'symbol' : '1.0-2'}}
+              </span>
+            </div>
+
+            <p class="history-card__name">
+              {{ tx.fund }}
+            </p>
+
+            <div class="history-card__footer">
+              <span class="history-card__date">
+                {{ tx.date | date: 'dd/MM/yyyy HH:mm' }}
+              </span>
+
+              <span class="notification-badge">
+                {{ tx.notification }}
+              </span>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+
+  </ng-container>
+</section>

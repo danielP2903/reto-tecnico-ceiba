@@ -1,0 +1,14 @@
+    <div class="header">
+      <h1 class="header__title">Lista de fondos</h1>
+      <p class="header__subtitle">
+        Realiza tu inversión de forma fácil y segura
+      </p>
+    </div>
+  <div class="grid">
+    @for (item of funds(); track $index) {
+      <app-card-fund [fund]="item" (fundSubscribe)="receiveFundSubscribe($event)"></app-card-fund>
+    }
+  </div>
+@if (isModalOpen()) {
+  <app-modal-confirm-suscription [fund]="fundSelected()" (confirmAction)="executeActionConfirm($event)"></app-modal-confirm-suscription>
+}

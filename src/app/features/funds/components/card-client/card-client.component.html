@@ -1,0 +1,29 @@
+<div class="client-card">
+  <h2>Información del cliente</h2>
+  <div class="client-card__header">
+    <h2 class="client-card__name">
+      {{ getName()}}
+    </h2>
+    <span class="client-card__status">
+      Activo
+    </span>
+  </div>
+
+  <div class="client-card__body">
+    <div class="client-card__item">
+      <span class="client-card__label">Saldo Disponible</span>
+      <span class="client-card__value client-card__value--primary">
+        {{getAmount() | currency: '$ '
+              :'symbol':'1.0-2' }}
+      </span>
+    </div>
+
+    <div class="client-card__item">
+      <span class="client-card__label">Monto Invertido</span>
+      <span class="client-card__value client-card__value--success">
+        {{ getInvest() | currency: '$ '
+              :'symbol':'1.0-2' }}
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,262 @@
+@import '../../../../../styles';
+
+// ─── History ────────────────────────────────────────────────
+.history {
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include for-phone-only {
+    padding: 1rem;
+  }
+
+
+  // Empty state
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 4rem 2rem;
+    background-color: $btg-gray-50;
+    border-radius: $radius-lg;
+    border: 1px dashed $btg-gray-200;
+    text-align: center;
+  }
+
+  &__empty-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: $btg-gray-200;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 2.5px solid $btg-gray-400;
+      border-radius: 3px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 2px;
+      background-color: $btg-gray-400;
+      box-shadow: 0 -5px 0 $btg-gray-400, 0 -10px 0 $btg-gray-400;
+    }
+  }
+
+  &__empty-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $btg-gray-800;
+    margin: 0;
+  }
+
+  &__empty-text {
+    font-size: 0.875rem;
+    color: $btg-gray-600;
+    margin: 0;
+    max-width: 300px;
+  }
+
+  // Table wrapper
+  &__table-wrapper {
+    overflow-x: auto;
+    border-radius: $radius-lg;
+    border: 1px solid $btg-gray-200;
+    background-color: $btg-white;
+
+    @include for-phone-only {
+      display: none;
+    }
+  }
+}
+
+// ─── Table ──────────────────────────────────────────────────
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  &__head {
+    background-color: $btg-gray-50;
+    border-bottom: 1px solid $btg-gray-200;
+  }
+
+  &__th {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $btg-gray-600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+
+    &--right {
+      text-align: right;
+    }
+  }
+
+  &__row {
+    border-bottom: 1px solid $btg-gray-100;
+    transition: background-color 0.1s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $btg-gray-50;
+    }
+  }
+
+  &__td {
+    padding: 0.875rem 1rem;
+    color: $btg-text;
+    vertical-align: middle;
+
+    &--date {
+      color: $btg-gray-600;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    &--name {
+      font-weight: 500;
+      max-width: 220px;
+      font-size: 16px;
+
+      @include for-tablet-portrait-up {
+        max-width: 180px;
+        font-size: 10px;
+      }
+    }
+
+    &--amount {
+      text-align: right;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    &--negative {
+      color: $btg-danger;
+    }
+
+    &--positive {
+      color: $btg-success;
+    }
+  }
+}
+
+// ─── Mobile cards ───────────────────────────────────────────
+
+.history-cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @include for-tablet-portrait-up {
+    display: none;
+  }
+
+  @include for-desktop-up {
+    display: none;
+  }
+}
+
+.history-card {
+  background-color: $btg-white;
+  border: 1px solid $btg-gray-200;
+  border-radius: $radius-lg;
+  padding: 1rem;
+  border-left: 4px solid $btg-primary;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &--cancellation {
+    border-left-color: $btg-success;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $btg-text;
+    margin: 0;
+    word-break: break-word;
+  }
+
+  &__amount {
+    font-size: 1rem;
+    font-weight: 700;
+
+    &--negative { color: $btg-danger; }
+    &--positive { color: $btg-success; }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid $btg-gray-100;
+  }
+
+  &__date {
+    font-size: 0.78rem;
+    color: $btg-gray-600;
+  }
+}
+
+// ─── Badges ────────────────────────────────────────────────
+
+.type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &--subscription {
+    background-color: rgba($btg-primary, 0.1);
+    color: $btg-primary;
+  }
+
+  &--cancellation {
+    background-color: $btg-success-light;
+    color: $btg-success;
+  }
+}
+
+.notification-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: $radius-md;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: $btg-gray-100;
+  color: $btg-gray-600;
+}

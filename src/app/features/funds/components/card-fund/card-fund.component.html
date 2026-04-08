@@ -1,0 +1,46 @@
+<div class="fund-card">
+  <div class="fund-card__header">
+      <span
+        class="fund-card__category"
+        [class.fund-card__category--fic]="fund.category === 'FIC'"
+      >
+        {{ fund.category }}
+      </span>
+      @if (hasSubscription()) {
+        <span class="fund-card__badge">
+          Suscrito
+        </span>
+      }
+    </div>
+
+    <div class="fund-card__body">
+      <h2 class="fund-card__name">
+        {{ fund.name }}
+      </h2>
+
+      <div class="fund-card__amount">
+        <span class="fund-card__amount-label">
+          Minimum amount
+        </span>
+        <span class="fund-card__amount-value">
+          {{ fund.minimumAmount | currency : '$ ' : 'symbol' : '1.0-2' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="fund-card__footer">
+
+        <button
+        (click)="fundSubscribe.emit(fund)"
+          class="btn btn--primary"
+          [ngClass]="{
+            'btn--primary':!hasSubscription(),
+            'btn--danger':hasSubscription()
+          }"
+        >
+          {{hasSubscription() ? 'Cancelar suscripción' : 'Suscribirse'}}
+        </button>
+
+
+    </div>
+</div>
