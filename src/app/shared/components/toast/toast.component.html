@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="container__toast container__toast--{{type}}" [class.is-leaving]="isLeaving">
+    <div class="container__info">
+      <div class="container__info--column">
+        <span class="container__info--title-{{type}}">{{title}}</span>
+        <span class="container__info--text-{{type}}">{{text}}</span>
+      </div>
+    </div>
+    <div class="container__bar container__bar--{{type}}" *ngIf="duration > 0"></div>
+  </div>
+</div>

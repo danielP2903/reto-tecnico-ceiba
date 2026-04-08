@@ -1,0 +1,167 @@
+@import '../../../../styles';
+
+//success
+$success-color-50:#EAF3DE;
+$success-color-400:#3B6D11;
+$success-color-600:  #27500A;
+$success-color-800:  #3B6D11;
+
+//danger
+$danger-color-50:#FCEBEB;
+$danger-color-400:#A32D2D;
+$danger-color-600:#501313;
+$danger-color-800:#A32D2D;
+
+//info
+$info-color-50:#E6F1FB;
+$info-color-400:#185FA5;
+$info-color-600:#042C53;
+$info-color-800:#185FA5;
+
+//warning
+$warning-color-50:#FAEEDA;
+$warning-color-400:#854F0B;
+$warning-color-600:#412402;
+$warning-color-800:#854F0B;
+
+$surface-color:#e8e2d9;
+
+// ── Keyframes ──────────────────────────────────────────────
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+}
+
+@keyframes progress-bar {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+// ── Component ─────────────────────────────────────────────
+.container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+
+  @include for-tablet-portrait-up {
+    right: 1.5rem;
+    left: auto;
+    bottom: 1.5rem;
+    width: 380px;
+  }
+
+  @include for-phone-only {
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0 1rem 1rem;
+  }
+
+  @include element('toast') {
+    position: relative;
+    padding: 1rem;
+    border-radius: 5px;
+    max-width: 400px;
+    border: 1px solid $surface-color;
+    overflow: hidden;
+    animation: toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    @include for-tablet-portrait-up {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    @include for-phone-only {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    &.is-leaving {
+      animation: toast-out 0.3s ease-in forwards;
+    }
+
+    &--success {
+      background-color: $success-color-50;
+      border-left: 5px solid $success-color-400;
+    }
+    &--warning {
+      background-color: $warning-color-50;
+      border-left: 5px solid $warning-color-400;
+    }
+    &--danger {
+      background-color: $danger-color-50;
+      border-left: 5px solid $danger-color-400;
+    }
+    &--info {
+      background-color: $info-color-50;
+      border-left: 5px solid $info-color-400;
+    }
+  }
+
+  // ── Barra de progreso ──────────────────────────────────
+  @include element('bar') {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    animation: progress-bar var(--toast-duration, 4000ms) linear forwards;
+
+    &--success { background-color: $success-color-400; }
+    &--warning { background-color: $warning-color-400; }
+    &--danger  { background-color: $danger-color-400;  }
+    &--info    { background-color: $info-color-400;    }
+  }
+
+  // ── Info block ─────────────────────────────────────────
+  @include element('info') {
+    display: flex;
+    gap: 1rem;
+
+    &--title-success { color: $success-color-600; font-size: 14px; font-weight: 600; }
+    &--title-danger  { color: $danger-color-600;  font-size: 14px; font-weight: 600; }
+    &--title-info    { color: $info-color-600;    font-size: 14px; font-weight: 600; }
+    &--title-warning { color: $warning-color-600; font-size: 14px; font-weight: 600; }
+
+    &--text-success { color: $success-color-800; font-size: 13px; font-weight: 400; }
+    &--text-danger  { color: $danger-color-800;  font-size: 13px; font-weight: 400; }
+    &--text-warning { color: $warning-color-800; font-size: 13px; font-weight: 400; }
+    &--text-info    { color: $info-color-800;    font-size: 13px; font-weight: 400; }
+
+    &--column {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+i {
+  padding: 5px;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 100%;
+
+  .container__toast--success & { background-color: $success-color-400; }
+  .container__toast--danger  & { background-color: $danger-color-400;  }
+  .container__toast--warning & { background-color: $warning-color-400; }
+  .container__toast--info    & { background-color: $info-color-400;    }
+}

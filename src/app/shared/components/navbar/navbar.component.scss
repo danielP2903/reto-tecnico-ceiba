@@ -1,0 +1,88 @@
+@import '../../../../styles';
+.navbar {
+  width: 100%;
+  background: #faf9f5;
+  color: $primary-color;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    @include for-desktop-up {
+      padding: 1rem 3rem;
+    }
+  }
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__toggle {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: $primary-color;
+    cursor: pointer;
+
+    @include for-desktop-up {
+      display: none;
+    }
+  }
+
+  &__menu {
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #faf9f5;
+    color: $primary-color;
+    &--active {
+      display: flex;
+    }
+
+    @include for-desktop-up {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      gap: 2rem;
+    }
+  }
+
+  &__item {
+    text-align: center;
+
+    @include for-desktop-up {
+      text-align: left;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 1rem;
+    color: $primary-color;
+    text-decoration: none;
+    transition: 0.3s;
+
+    &:hover {
+      background: #faf9f5;
+    }
+
+    &--cta {
+      background: #ff4d4d;
+      border-radius: 6px;
+      margin: 0.5rem;
+
+      @include for-desktop-up {
+        margin: 0;
+        padding: 0.5rem 1rem;
+      }
+
+      &:hover {
+        background: #ff1a1a;
+      }
+    }
+  }
+}

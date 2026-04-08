@@ -1,0 +1,9 @@
+<div class="container"  [style.max-width.px]="width">
+    @for (item of tabs; track $index) {
+      <div (click)="selectItem($index)" role="button" class="container__item"  [ngClass]="{
+        'container--active': $index === itemSelected,
+      }">
+        <span>{{ item.title }}</span>
+      </div>
+    }
+</div>

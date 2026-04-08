@@ -1,1 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
+@import './scss/mixins';
+@import './scss/variables';
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1rem;
+
+  @include element('title') {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $btg-primary;
+    margin: 0;
+    letter-spacing: -0.02em;
+
+    @include for-phone-only {
+      font-size: 1.4rem;
+    }
+  }
+
+  @include element('subtitle') {
+    font-size: 0.95rem;
+    color: $btg-gray-600;
+    margin: 0;
+  }
+}
+
+// ─── Buttons ────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.6rem 1.25rem;
+  border-radius: $radius-md;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s, transform 0.1s;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &--primary {
+    background-color: $btg-primary;
+    color: $btg-white;
+
+    &:hover {
+      background-color: $btg-primary-light;
+    }
+
+    &:disabled {
+      background-color: $btg-gray-200;
+      color: $btg-gray-400;
+      cursor: not-allowed;
+    }
+  }
+
+  &--danger {
+    background-color: transparent;
+    color: $btg-danger;
+    border: 1.5px solid $btg-danger;
+
+    &:hover {
+      background-color: $btg-danger-light;
+    }
+  }
+
+  &--secondary {
+    background-color: $btg-gray-100;
+    color: $btg-gray-800;
+
+    &:hover {
+      background-color: $btg-gray-200;
+    }
+  }
+}
